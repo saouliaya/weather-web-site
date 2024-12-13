@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><!--make it responcive -->
+    <title>Weather App</title>
+    <link rel="stylesheet" href="./style.css">
+    <!-- link to import the icons -->  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" /> 
+</head>
+<body>
+    <div class="app-container">
+        <div class="side-container">
+            <div class="input-container">  
+                <input class="city-input" placeholder = "search city..." type="text" autocomplete="on"/>
+                <button class="search-btn">  
+                    <span class="material-symbols-outlined">
+                        search
+                    </span> 
+                </button> 
+                <button class="my_location-btn">  
+                    <span class="material-symbols-outlined">
+                        my_location
+                    </span> 
+                </button>  
+            </div>
+            <section class="weather-info" style="display: none;">
+                <div class="location-data-container">
+                    <h5 class="current-date-txt regular-txt">Mon, 05 Oct</h5>
+                    <div class="location">
+                        <span class="material-symbols-outlined">
+                            location_on
+                        </span>
+                        <h4 class="country-txt">Setif</h4>    
+                    </div>
+                </div>
+                <div class="weather-container">
+                    <img src="assets/weather/clouds.png" alt="" class="weather-image">
+                    <div class="weather-info">
+                        <h1 class="temp-txt">29 °C</h1>
+                        <h3 class="condition-txt regular-txt">clouds</h3>
+                    </div>
+                </div>
+                <div class="sun-info-container">
+                    <div class="sun-info">
+                        <span class="material-symbols-outlined">
+                            wb_sunny
+                        </span> 
+                        <h5 class="sunrise-time regular-txt">6:15 AM</h5>
+                    </div>
+                    <div class="sun-info">
+                        <span class="material-symbols-outlined">
+                            dark_mode
+                        </span> 
+                        <h5 class="sunset-time regular-txt">7:45 PM</h5>
+                    </div>
+                </div>
+                <div class="weather-conditions-container">
+                    <div class="condition-item">
+                        <span class="material-symbols-outlined">
+                            humidity_percentage
+                        </span>
+                        <div class="condition-info">
+                            <h5 class="regular-txt">humidity</h5>
+                            <h5 class="humidity-value-txt regular-txt">55%</h5>
+                        </div>
+                    </div>
+                    <div class="condition-item">
+                        <span class="material-symbols-outlined">
+                            air
+                        </span>
+                        <div class="condition-info">
+                            <h5 class="regular-txt">wind speed</h5>
+                            <h5 class="wind-value-txt regular-txt">2 M/s</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="forecast-time-container">
+                </div>
+            </section>        
+            <section class="not-found section-message" style="display: none;" >
+                <img src="assets/message/not-found.png">
+                <div>
+                    <h1>search city</h1>
+                    <h4 class="regulat-txt">sorry city not found please try again </h4>
+                </div>
+            </section>  
+        </div>
+        <div class="main-container" >
+            <h2 class="titles" style="display: none;">the weather in the next 5 days:</h2>
+            <div class="forecast-date-container" style="display: none;"> 
+            </div>
+            <div class="charts-section" style="display: none;">
+                <canvas id="timeTemp"></canvas>
+                <canvas id="timeHumidity"></canvas>
+                <canvas id="dayTemp"></canvas>
+                <canvas id="dayHumidity"></canvas>
+                <table id="windDirection">
+                    <tr>
+                        <td><img class="wind-img" src="assets/wind/North.png"></td>
+                        <td><img class="wind-img" src="assets/wind/North.png"></td>
+                        <td><img class="wind-img" src="assets/wind/North.png"></td>
+                        <td><img class="wind-img" src="assets/wind/North.png"></td>
+                        <td><img class="wind-img" src="assets/wind/North.png"></td>
+                        <td><img class="wind-img" src="assets/wind/North.png"></td>
+                        <td><img class="wind-img" src="assets/wind/North.png"></td>
+                      </tr>
+                      <tr>
+                        <td> 1</td>
+                        <td> 2</td>
+                        <td> 3</td>
+                        <td> 4</td>
+                        <td> 5</td>
+                        <td> 6</td>
+                        <td> 7</td>
+                      </tr>
+                      <tr>
+                        <td> 1</td>
+                        <td> 2</td>
+                        <td> 3</td>
+                        <td> 4</td>
+                        <td> 5</td>
+                        <td> 6</td>
+                        <td> 7</td>
+                      </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js" defer></script>
+  
+</body>
+</html>
