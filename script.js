@@ -86,6 +86,7 @@ async function displayweatherdata (weatherData){
         h2.style.display = 'none';
     }
     console.log(weatherData)
+    await updateWeatherAnimation(weatherData.weather[0].main)
     let input =weatherData.name;
     city.textContent = input;
     date.textContent = getDate(new Date());
@@ -98,7 +99,6 @@ async function displayweatherdata (weatherData){
     icon.src = `assets/weather/${getIcon(weatherData.weather[0].id)}`;
     await updateHourlyForecast(input);
     await updateDayForecast(input);
-    await updateWeatherAnimation(weatherData.weather[0].main)
     cityWeather.style.display = 'contents';
     h2.style.display = 'contents';
     forcastsdate.style.display='flex';
