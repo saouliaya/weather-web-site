@@ -84,6 +84,7 @@ async function displayweatherdata (weatherData){
         cityWeather.style.display = 'none';
         chart.style.display='none';
         h2.style.display = 'none';
+        await updateWeatherAnimation(weatherData.weather[0].main)
     }
     console.log(weatherData)
     let input =weatherData.name;
