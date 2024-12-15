@@ -86,6 +86,7 @@ async function displayweatherdata (weatherData){
         cityWeather.style.display = 'none';
         chart.style.display='none';
         h2.style.display = 'none';
+        void box.offsetWidth; 
         appContainer.style.background='none';
     }
     else{
