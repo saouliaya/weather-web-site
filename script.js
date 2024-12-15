@@ -2,11 +2,12 @@ const API_KEY = "348f79f939d14e98b6b4dda005dcb73b";
   
 const searchInput = document.querySelector(".city-input");
 const searchButton = document.querySelector(".search-btn");
-const mylocationButton = document.querySelector(".my_location-btn");
-  
+const mylocationButton = document.querySelector(".my_location-btn");  
+
 const cityWeather = document.querySelector(".weather-info");
 const notFound = document.querySelector(".not-found");
 const sideContainer = document.querySelector(".side-container");
+
 const city = document.querySelector(".country-txt");
 const temperature = document.querySelector(".temp-txt");
 const sunrise = document.querySelector(".sunrise-time")
@@ -16,11 +17,12 @@ const humid = document.querySelector(".humidity-value-txt");
 const wind = document.querySelector(".wind-value-txt");
 const icon = document.querySelector(".weather-image");
 const date = document.querySelector(".current-date-txt");
+const forcaststime = document.querySelector(".forecast-time-container");
+
 const h2 = document.querySelector(".titles");
 const forcastsdate = document.querySelector(".forecast-date-container");
-const forcaststime = document.querySelector(".forecast-time-container");
 const chart = document.querySelector(".charts-section");
-const wD = document.getElementById('windDirection');
+const direction = document.getElementById('windDirection');
 
 searchButton.addEventListener("click", async () => {
     if (!searchInput.value.trim()) {
@@ -38,6 +40,7 @@ searchButton.addEventListener("click", async () => {
 });
   
 searchInput.addEventListener("keydown", async (event) => {
+    //console.log(keydown);
     if (event.key === "Enter") {
         if (!searchInput.value.trim()) {
             alert("Please enter the city");
@@ -66,7 +69,7 @@ mylocationButton.addEventListener("click",()=>{
             if (!sideContainer.classList.toggle("sidebar")) {
                 sideContainer.classList.toggle("sidebar");
             }
-            console.log(position);
+            //console.log(position);
             },() => {
                 alert('Unable to retrieve your location');
             }
@@ -84,9 +87,10 @@ async function displayweatherdata (weatherData){
         cityWeather.style.display = 'none';
         chart.style.display='none';
         h2.style.display = 'none';
+        updateWeatherAnimation(weatherData.weather[0].main)
     }
-    console.log(weatherData)
-    await updateWeatherAnimation(weatherData.weather[0].main)
+    //console.log(weatherData)
+    updateWeatherAnimation(weatherData.weather[0].main)
     let input =weatherData.name;
     city.textContent = input;
     date.textContent = getDate(new Date());
@@ -114,7 +118,7 @@ async function getWeatherData(apiUrl) {
 async function updateHourlyForecast(input) {
     const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${input}&units=metric&appid=${API_KEY}`;
     const forecasts = await getWeatherData(apiUrl);
-    console.log(forecasts)
+    //console.log(forecasts)
     forcaststime.innerHTML = '';
     const hours = forecasts.list.slice(0, 7);
     const times = [];
@@ -137,12 +141,13 @@ async function updateHourlyForecast(input) {
         humidity.push(humid);
     });
     await updateTimeChart(times,temps,humidity);
-    await windTable(hours);
+    windTable(hours);
 }
 
 async function updateDayForecast(input) {
     const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${input}&units=metric&appid=${API_KEY}`;
     const forecasts = await getWeatherData(apiUrl);
+    //console.log(forecasts)
     const time1 = '12:00:00';
     const time2 = '00:00:00';
     const day = new Date().toISOString().split('T')[0];
@@ -209,23 +214,17 @@ function getWindDirection(degrees) {
     if (degrees >= 292.5 && degrees < 337.5) return 'NorthWest.png';
     return 'North.png'; // for 360° or 0°
 }
-async function windTable(Data) {
+
+function windTable(Data) {
     let i = 0;
     Data.forEach((data) => {
-        const time = getTime(data.dt * 1000);  // Assuming getTime converts timestamp to readable time
+        const time = getTime(data.dt * 1000); 
         const speed = data.wind.speed;
         const degrees = data.wind.deg;
-
-        // Update the image source based on the wind direction
-        const directionImage = getWindDirection(degrees);  // Assuming this function returns a direction (e.g., 'North', 'NE')
-        wD.rows[0].cells[i].getElementsByTagName('img')[0].src = `assets/wind/${directionImage}`;
-
-        // Update wind speed
-        wD.rows[1].cells[i].innerHTML = `${speed} km/h`; // Assuming you want to display speed in km/h
-
-        // Update the time
-        wD.rows[2].cells[i].innerHTML = time;
-
+        const directionImage = getWindDirection(degrees);
+        direction.rows[0].cells[i].getElementsByTagName('img')[0].src = `assets/wind/${directionImage}`;
+        direction.rows[1].cells[i].innerHTML = `${speed} km/h`; 
+        direction.rows[2].cells[i].innerHTML = time;
         i++;
     });
 }
@@ -506,7 +505,6 @@ function updateWeatherAnimation(weatherCondition) {
     // Remove any existing animation classes
     appContainer.classList.remove('snowy-animation', 'rainy-animation', 'sunny-animation', 'cloudy-animation');
 
-    // Add the corresponding animation class based on the weather condition
     switch (weatherCondition.toLowerCase()) {
         case 'snow':
             appContainer.classList.add('snowy-animation');
@@ -521,6 +519,6 @@ function updateWeatherAnimation(weatherCondition) {
             appContainer.classList.add('cloudy-animation');
             break;
         default:
-            appContainer.style.background = 'none'; // Default to no background or animation
+            appContainer.style.background = 'none';
     }
 }
