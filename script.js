@@ -522,6 +522,6 @@ function updateWeatherAnimation(weatherCondition) {
             appContainer.classList.add('cloudy-animation');
             break;
         case 'none':
-            appContainer.classList.remove('snowy-animation', 'rainy-animation', 'sunny-animation', 'cloudy-animation'); 
+            break; 
     }
 }
