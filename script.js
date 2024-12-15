@@ -84,7 +84,6 @@ async function displayweatherdata (weatherData){
         cityWeather.style.display = 'none';
         chart.style.display='none';
         h2.style.display = 'none';
-        await updateWeatherAnimation(weatherData.weather[0].main)
     }
     console.log(weatherData)
     let input =weatherData.name;
@@ -99,7 +98,7 @@ async function displayweatherdata (weatherData){
     icon.src = `assets/weather/${getIcon(weatherData.weather[0].id)}`;
     await updateHourlyForecast(input);
     await updateDayForecast(input);
-    await updateWeatherAnimation(weatherData.weather[0].main)
+    updateWeatherAnimation(weatherData.weather[0].main)
     cityWeather.style.display = 'contents';
     h2.style.display = 'contents';
     forcastsdate.style.display='flex';
@@ -522,6 +521,6 @@ function updateWeatherAnimation(weatherCondition) {
             appContainer.classList.add('cloudy-animation');
             break;
         default:
-            appContainer.style.background = 'none'; // Default to no background or animation
+            appContainer.classList.remove('snowy-animation', 'rainy-animation', 'sunny-animation', 'cloudy-animation'); 
     }
 }
