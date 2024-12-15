@@ -37,6 +37,8 @@ searchButton.addEventListener("click", async () => {
     }
     sideContainer.classList.toggle("sidebar");
     searchInput.value = '';
+    // Remove any existing animation classes
+    appContainer.classList.remove('snowy-animation', 'rainy-animation', 'sunny-animation', 'cloudy-animation');
 });
   
 searchInput.addEventListener("keydown", async (event) => {
@@ -53,6 +55,8 @@ searchInput.addEventListener("keydown", async (event) => {
                 sideContainer.classList.toggle("sidebar");
             }
             searchInput.value = '';
+            // Remove any existing animation classes
+            appContainer.classList.remove('snowy-animation', 'rainy-animation', 'sunny-animation', 'cloudy-animation');
         }
     }
 });
@@ -68,7 +72,9 @@ mylocationButton.addEventListener("click",()=>{
             if (!sideContainer.classList.toggle("sidebar")) {
                 sideContainer.classList.toggle("sidebar");
             }
-            console.log(position);
+            //console.log(position);
+            // Remove any existing animation classes
+            appContainer.classList.remove('snowy-animation', 'rainy-animation', 'sunny-animation', 'cloudy-animation');
             },() => {
                 alert('Unable to retrieve your location');
             }
@@ -86,8 +92,6 @@ async function displayweatherdata (weatherData){
         cityWeather.style.display = 'none';
         chart.style.display='none';
         h2.style.display = 'none';
-        void box.offsetWidth; 
-        appContainer.style.background='none';
     }
     else{
         console.log(weatherData)
@@ -507,8 +511,6 @@ async function updateDateChart(days,temps,humidity) {
 }
 
 function updateWeatherAnimation(weatherCondition) {
-    // Remove any existing animation classes
-    appContainer.classList.remove('snowy-animation', 'rainy-animation', 'sunny-animation', 'cloudy-animation');
 
     // Add the corresponding animation class based on the weather condition
     switch (weatherCondition.toLowerCase()) {
