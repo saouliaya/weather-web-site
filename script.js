@@ -1,4 +1,6 @@
 const API_KEY = "348f79f939d14e98b6b4dda005dcb73b";
+
+const appContainer = document.querySelector('.app-container');
   
 const searchInput = document.querySelector(".city-input");
 const searchButton = document.querySelector(".search-btn");
@@ -84,27 +86,29 @@ async function displayweatherdata (weatherData){
         cityWeather.style.display = 'none';
         chart.style.display='none';
         h2.style.display = 'none';
-        updateWeatherAnimation('none') 
+        appContainer.classList.remove('snowy-animation', 'rainy-animation', 'sunny-animation', 'cloudy-animation');
     }
-    console.log(weatherData)
-    let input =weatherData.name;
-    city.textContent = input;
-    date.textContent = getDate(new Date());
-    temperature.textContent = `${weatherData.main.temp.toFixed(1)} °C`;
-    condition.textContent = weatherData.weather[0].main;
-    sunrise.textContent = getTime (weatherData.sys.sunrise * 1000);
-    sunset.textContent = getTime (weatherData.sys.sunset * 1000);
-    humid.textContent = `${weatherData.main.humidity}%`;
-    wind.textContent = `${weatherData.wind.speed} m/s`;
-    icon.src = `assets/weather/${getIcon(weatherData.weather[0].id)}`;
-    await updateHourlyForecast(input);
-    await updateDayForecast(input);
-    updateWeatherAnimation(weatherData.weather[0].main)
-    cityWeather.style.display = 'contents';
-    h2.style.display = 'contents';
-    forcastsdate.style.display='flex';
-    chart.style.display='flex';
-    notFound.style.display = 'none';
+    else{
+        console.log(weatherData)
+        let input =weatherData.name;
+        city.textContent = input;
+        date.textContent = getDate(new Date());
+        temperature.textContent = `${weatherData.main.temp.toFixed(1)} °C`;
+        condition.textContent = weatherData.weather[0].main;
+        sunrise.textContent = getTime (weatherData.sys.sunrise * 1000);
+        sunset.textContent = getTime (weatherData.sys.sunset * 1000);
+        humid.textContent = `${weatherData.main.humidity}%`;
+        wind.textContent = `${weatherData.wind.speed} m/s`;
+        icon.src = `assets/weather/${getIcon(weatherData.weather[0].id)}`;
+        await updateHourlyForecast(input);
+        await updateDayForecast(input);
+        updateWeatherAnimation(weatherData.weather[0].main)
+        cityWeather.style.display = 'contents';
+        h2.style.display = 'contents';
+        forcastsdate.style.display='flex';
+        chart.style.display='flex';
+        notFound.style.display = 'none';
+    }
 }
 
 async function getWeatherData(apiUrl) {  
@@ -138,7 +142,7 @@ async function updateHourlyForecast(input) {
         humidity.push(humid);
     });
     await updateTimeChart(times,temps,humidity);
-    await windTable(hours);
+    windTable(hours);
 }
 
 async function updateDayForecast(input) {
@@ -210,7 +214,7 @@ function getWindDirection(degrees) {
     if (degrees >= 292.5 && degrees < 337.5) return 'NorthWest.png';
     return 'North.png'; // for 360° or 0°
 }
-async function windTable(Data) {
+function windTable(Data) {
     let i = 0;
     Data.forEach((data) => {
         const time = getTime(data.dt * 1000);  // Assuming getTime converts timestamp to readable time
@@ -502,8 +506,6 @@ async function updateDateChart(days,temps,humidity) {
 }
 
 function updateWeatherAnimation(weatherCondition) {
-    const appContainer = document.querySelector('.app-container');
-
     // Remove any existing animation classes
     appContainer.classList.remove('snowy-animation', 'rainy-animation', 'sunny-animation', 'cloudy-animation');
 
@@ -520,8 +522,6 @@ function updateWeatherAnimation(weatherCondition) {
             break;
         case 'clouds':
             appContainer.classList.add('cloudy-animation');
-            break;
-        case 'none':
             break; 
     }
 }
