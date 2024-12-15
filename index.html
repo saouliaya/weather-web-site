@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"><!--make it responcive -->
+    <link rel="icon" href="assets/icon.png">
     <title>Weather App</title>
     <link rel="stylesheet" href="./style.css">
     <!-- link to import the icons -->  
@@ -12,7 +13,7 @@
     <div class="app-container">
         <div class="side-container">
             <div class="input-container">  
-                <input class="city-input" placeholder = "search city..." type="text" autocomplete="on"/>
+                <input class="city-input" placeholder = "search city..." type="text"/>
                 <button class="search-btn">  
                     <span class="material-symbols-outlined">
                         search
@@ -35,7 +36,7 @@
                     </div>
                 </div>
                 <div class="weather-container">
-                    <img src="assets/weather/clouds.png" alt="" class="weather-image">
+                    <img src="assets/weather/clouds.png" class="weather-image">
                     <div class="weather-info">
                         <h1 class="temp-txt">29 °C</h1>
                         <h3 class="condition-txt regular-txt">clouds</h3>
@@ -79,15 +80,15 @@
                 </div>
             </section>        
             <section class="not-found section-message" style="display: none;" >
-                <img src="assets/message/not-found.png">
+                <img src="assets/message/404.png">
                 <div>
-                    <h1>search city</h1>
-                    <h4 class="regulat-txt">sorry city not found please try again </h4>
+                    <h1>OOPS</h1>
+                    <h4 class="regulat-txt">This city cannot be found, please try again </h4>
                 </div>
             </section>  
         </div>
         <div class="main-container" >
-            <h2 class="titles" style="display: none;">the weather in the next 5 days:</h2>
+            <h2 class="titles" style="display: none;">Weather conditions for the next 5 days:</h2>
             <div class="forecast-date-container" style="display: none;"> 
             </div>
             <div class="charts-section" style="display: none;">
