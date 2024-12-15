@@ -84,6 +84,7 @@ async function displayweatherdata (weatherData){
         cityWeather.style.display = 'none';
         chart.style.display='none';
         h2.style.display = 'none';
+        updateWeatherAnimation('none') 
     }
     console.log(weatherData)
     let input =weatherData.name;
@@ -520,7 +521,7 @@ function updateWeatherAnimation(weatherCondition) {
         case 'clouds':
             appContainer.classList.add('cloudy-animation');
             break;
-        default:
+        case 'none':
             appContainer.classList.remove('snowy-animation', 'rainy-animation', 'sunny-animation', 'cloudy-animation'); 
     }
 }
