@@ -86,7 +86,7 @@ async function displayweatherdata (weatherData){
         cityWeather.style.display = 'none';
         chart.style.display='none';
         h2.style.display = 'none';
-        appContainer.background='none';
+        appContainer.style.background='none';
     }
     else{
         console.log(weatherData)
