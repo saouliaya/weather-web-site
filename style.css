@@ -9,7 +9,7 @@
 }
 
 body {
-  background:url(assets/background.jpeg);
+  background:url(assets/1.jpg);
   width: 100%;
   height: 100%;
   background-position: center;
@@ -19,6 +19,7 @@ body {
   position: relative;
   justify-content: center;
   overflow: hidden;
+  backdrop-filter: blur(4px);
 } 
 .app-container {
     display: flex;
@@ -270,6 +271,7 @@ body {
 }
 .forecast-date-container::-webkit-scrollbar {
     display: none; /* For Chrome, Safari, and Edge */
+    
 }
 
 .forecast-item-date {
