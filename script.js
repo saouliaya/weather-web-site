@@ -22,6 +22,7 @@ const forcaststime = document.querySelector(".forecast-time-container");
 const chart = document.querySelector(".charts-section");
 const wD = document.getElementById('windDirection');
 
+
 searchButton.addEventListener("click", async () => {
     if (!searchInput.value.trim()) {
         alert("Please enter the city");
@@ -33,10 +34,13 @@ searchButton.addEventListener("click", async () => {
     if (!sideContainer.classList.toggle("sidebar")) {
         sideContainer.classList.toggle("sidebar");
     }
+    
     searchInput.value = '';
 });
+
   
 searchInput.addEventListener("keydown", async (event) => {
+    //console.log("Keydown")
     if (event.key === "Enter") {
         if (!searchInput.value.trim()) {
             alert("Please enter the city");
@@ -53,7 +57,8 @@ searchInput.addEventListener("keydown", async (event) => {
         }
     }
 });
-    
+
+
 mylocationButton.addEventListener("click",()=>{
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition( async (position) => {
@@ -65,7 +70,7 @@ mylocationButton.addEventListener("click",()=>{
             if (!sideContainer.classList.toggle("sidebar")) {
                 sideContainer.classList.toggle("sidebar");
             }
-            console.log(position);
+            //console.log(position);
             },() => {
                 alert('Unable to retrieve your location');
             }
@@ -84,7 +89,7 @@ async function displayweatherdata (weatherData){
         chart.style.display='none';
         h2.style.display = 'none';
     }
-    console.log(weatherData)
+   // console.log(weatherData)
     let input =weatherData.name;
     city.textContent = input;
     date.textContent = getDate(new Date());
@@ -113,7 +118,7 @@ async function getWeatherData(apiUrl) {
 async function updateHourlyForecast(input) {
     const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${input}&units=metric&appid=${API_KEY}`;
     const forecasts = await getWeatherData(apiUrl);
-    console.log(forecasts)
+    //console.log(forecasts)
     forcaststime.innerHTML = '';
     const hours = forecasts.list.slice(0, 7);
     const times = [];
