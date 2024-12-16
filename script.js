@@ -28,14 +28,16 @@ searchButton.addEventListener("click", async () => {
     if (!searchInput.value.trim()) {
         alert("Please enter the city");
         return;
+    } 
+    else {
+        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value.trim()}&units=metric&appid=${API_KEY}`;
+        const weatherData = await getWeatherData(apiUrl);
+        displayweatherdata (weatherData)
+        if (!sideContainer.classList.toggle("sidebar")) {
+            sideContainer.classList.toggle("sidebar");
+        }
+        searchInput.value = '';
     }
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value.trim()}&units=metric&appid=${API_KEY}`;
-    const weatherData = await getWeatherData(apiUrl);
-    displayweatherdata (weatherData)
-    if (!sideContainer.classList.toggle("sidebar")) {
-        sideContainer.classList.toggle("sidebar");
-    }
-    searchInput.value = '';
 });
   
 searchInput.addEventListener("keydown", async (event) => {
