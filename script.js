@@ -18,7 +18,7 @@ const humid = document.querySelector(".humidity-value-txt");
 const wind = document.querySelector(".wind-value-txt");
 const icon = document.querySelector(".weather-image");
 const date = document.querySelector(".current-date-txt");
-const h2 = document.querySelectorAll(".titles");
+const h2 = document.querySelector(".titles");
 const forcastsdate = document.querySelector(".forecast-date-container");
 const forcaststime = document.querySelector(".forecast-time-container");
 const chart = document.querySelector(".charts-section");
@@ -35,11 +35,11 @@ searchButton.addEventListener("click", async () => {
     if (!sideContainer.classList.toggle("sidebar")) {
         sideContainer.classList.toggle("sidebar");
     }
-    sideContainer.classList.toggle("sidebar");
     searchInput.value = '';
 });
   
 searchInput.addEventListener("keydown", async (event) => {
+    //console.log("keydown");
     if (event.key === "Enter") {
         if (!searchInput.value.trim()) {
             alert("Please enter the city");
