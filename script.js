@@ -18,7 +18,7 @@ const humid = document.querySelector(".humidity-value-txt");
 const wind = document.querySelector(".wind-value-txt");
 const icon = document.querySelector(".weather-image");
 const date = document.querySelector(".current-date-txt");
-const h2 = document.querySelector(".titles");
+const h2 = document.querySelectorAll(".titles");
 const forcastsdate = document.querySelector(".forecast-date-container");
 const forcaststime = document.querySelector(".forecast-time-container");
 const chart = document.querySelector(".charts-section");
@@ -103,7 +103,7 @@ async function displayweatherdata (weatherData){
         await updateDayForecast(input);
         updateWeatherAnimation(weatherData.weather[0].main)
         cityWeather.style.display = 'contents';
-        h2.style.display = 'contents';
+        h2.forEach((h)=>h.style.display = 'contents')
         forcastsdate.style.display='flex';
         chart.style.display='flex';
         notFound.style.display = 'none';
